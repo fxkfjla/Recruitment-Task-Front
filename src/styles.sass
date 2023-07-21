@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/bootstrap/scss/bootstrap"
+
+$background-color: #476a6f
+$primary-color: #519E8A
+$secondary-color: #7EB09B
+$text-color: #C5C9A4
+
+body
+  background-color: $background-color
+
+.wrapper
+  margin-left: auto
+  margin-right: auto
+
+  max-width: 1080px
+
+  padding-right: 10px
+  padding-left: 10px
+
+.my-bgc1
+  background-color: $primary-color
+
+.my-bgc2
+  background-color: $secondary-color
+
+.my-tc
+  color: $text-color
+
+.my-navbar-brand
+  @extend .navbar-brand, .fs-2, .fw-bold, .my-tc
+  transition: 0.3s
+  text-decoration: none
+
+.my-btn2
+  @extend .btn, .rounded-5, .fs-5, .fw-bolder, .ps-4, .pe-4, .my-bgc2, .my-tc
+  &:hover
+    background-color: $secondary-color

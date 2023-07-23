@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 
 import { ApiPaths } from '../enums/api-paths.enum';
 import { environment } from 'src/environments/environment';
@@ -24,7 +24,7 @@ export class UserService
   {
     let params = {page, size}
 
-    return this.http.get<User[]>(this.url, {params})    
+    return this.http.get<User[]>(this.url, {params, observe: 'response'})    
   }
 
   private url = environment.apiUrl + '/' + ApiPaths.Users; 

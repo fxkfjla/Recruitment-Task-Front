@@ -1,10 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { ApiPaths } from '../shared/api-paths.enum';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-form-screen',
   templateUrl: './form-screen.component.html',
   styleUrls: ['./form-screen.component.sass']
 })
-export class FormScreenComponent {
+export class FormScreenComponent
+{
+  @ViewChild('fileInputRef', { static: false }) fileInputRef!: ElementRef;
 
+  constructor(private http: HttpClient) {}
+
+  public loadXMLFile(event: Event): void
+  {
+    event.preventDefault()
+
+    const fileInput = this.fileInputRef.nativeElement as HTMLInputElement
+    const file = fileInput?.files?.[0]
+
+    if(file)
+    {
+      let formParams = new FormData();
+      formParams.append('file', file)
+
+      this.http.post(this.url + '/load-xml', formParams).subscribe
+      ({
+        next: (response) =>
+        {
+          console.log("response", response)
+          return "alskdj"
+        },
+        error: (error) =>
+        {
+          console.error("error", error)
+        },
+        complete: () => {
+          fileInput.value = '';
+        }
+      })
+    }
+  }
+
+  private url = environment.apiUrl + '/' + ApiPaths.Users; 
 }

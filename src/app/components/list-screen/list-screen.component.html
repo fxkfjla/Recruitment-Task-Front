@@ -1,0 +1,42 @@
+<app-header></app-header>
+
+<div class="wrapper">
+
+  <div class="my-table-wrapper">
+    <table class="my-table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Surname</th>
+          <th scope="col">Login</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.id}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.surname}}</td>
+          <td>{{user.login}}</td>
+        </tr>
+      </tbody>
+    </table>
+   
+    <!-- <ul class="pagination m-auto mt-2">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </div> -->
+    <ul class="my-pagination">
+      <li class="my-page-item"><a class="my-page-link" href="#">Previous</a></li>
+      <!-- <li class="my-page-item"><a class="my-page-link" href="#">page</a></li> -->
+      <li class="my-page-item"><a class="my-page-link" href="#">1</a></li>
+      <li class="my-page-item"><a class="my-page-link" href="#">2</a></li>
+      <li class="my-page-item"><a class="my-page-link" href="#">Next</a></li>
+    </ul>
+  </div>
+
+</div>

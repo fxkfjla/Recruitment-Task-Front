@@ -1,0 +1,39 @@
+@import '../../../styles'
+
+.my-table-wrapper
+  display: flex
+  text-align: center
+  justify-content: center
+  flex-direction: column
+
+.my-table
+  margin: auto
+  width: 35%
+  border-collapse: collapse
+  border-spacing: 0
+  color: $text-color
+
+.my-table th,
+.my-table td
+  padding: 8px
+  text-align: left
+  border-bottom: 1px solid $secondary-color
+
+.my-table tbody tr:nth-child(even)
+  background-color: $background-color-stripe
+
+.my-pagination
+  display: flex
+  padding: 0
+  margin: 5px
+  justify-content: center
+
+.my-page-item
+  list-style: none
+
+.my-page-link
+  text-decoration: none
+  padding: 5px 5px
+  color: #333
+  border-radius: 3px
+  color: $text-color

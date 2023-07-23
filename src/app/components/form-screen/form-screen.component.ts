@@ -1,8 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-import { ApiPaths } from '../shared/api-paths.enum';
-import { environment } from 'src/environments/environment';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-form-screen',
@@ -13,9 +10,9 @@ export class FormScreenComponent
 {
   @ViewChild('fileInputRef', { static: false }) fileInputRef!: ElementRef;
 
-  constructor(private http: HttpClient) {}
+  constructor(private userService: UserService) {}
 
-  public loadXMLFile(event: Event): void
+  public uploadXMLFile(event: Event): void
   {
     event.preventDefault()
 
@@ -24,10 +21,8 @@ export class FormScreenComponent
 
     if(file)
     {
-      let formParams = new FormData();
-      formParams.append('file', file)
-
-      this.http.post(this.url + '/load-xml', formParams, {responseType: 'text'}).subscribe
+      // update user interface on success and error
+      this.userService.uploadXMLFile(file).subscribe
       ({
         next: (response) =>
         {
@@ -35,14 +30,13 @@ export class FormScreenComponent
         },
         error: (error) =>
         {
-          console.error("Error:", error)
+          console.log("Error:", error)
         },
-        complete: () => {
-          fileInput.value = '';
+        complete: () =>
+        {
+          fileInput.value = ''
         }
       })
     }
   }
-
-  private url = environment.apiUrl + '/' + ApiPaths.Users; 
 }

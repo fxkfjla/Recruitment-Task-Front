@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StartScreenComponent } from './start-screen/start-screen.component';
-import { FormScreenComponent } from './form-screen/form-screen.component';
-import { ListScreenComponent } from './list-screen/list-screen.component';
-import { HeaderComponent } from './header/header.component';
+import { StartScreenComponent } from './components/start-screen/start-screen.component';
+import { FormScreenComponent } from './components/form-screen/form-screen.component';
+import { ListScreenComponent } from './components/list-screen/list-screen.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [

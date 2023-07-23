@@ -27,16 +27,15 @@ export class FormScreenComponent
       let formParams = new FormData();
       formParams.append('file', file)
 
-      this.http.post(this.url + '/load-xml', formParams).subscribe
+      this.http.post(this.url + '/load-xml', formParams, {responseType: 'text'}).subscribe
       ({
         next: (response) =>
         {
-          console.log("response", response)
-          return "alskdj"
+          console.log("Response:", response)
         },
         error: (error) =>
         {
-          console.error("error", error)
+          console.error("Error:", error)
         },
         complete: () => {
           fileInput.value = '';

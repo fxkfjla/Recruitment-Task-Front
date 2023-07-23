@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "../node_modules/bootstrap/scss/bootstrap"
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.scss"
 
 $background-color: #476a6f
 $primary-color: #519E8A
@@ -28,10 +29,10 @@ body
 .my-tc
   color: $text-color
 
-.my-navbar-brand
-  @extend .navbar-brand, .fs-2, .fw-bold, .my-tc
-  transition: 0.3s
-  text-decoration: none
+.my-btn1
+  @extend .btn, .rounded-5, .fs-5, .fw-bolder, .ps-4, .pe-4, .my-bgc1, .my-tc
+  &:hover
+    background-color: $primary-color
 
 .my-btn2
   @extend .btn, .rounded-5, .fs-5, .fw-bolder, .ps-4, .pe-4, .my-bgc2, .my-tc

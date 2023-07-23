@@ -26,6 +26,11 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "sass",
             "assets": [
+              {
+                "glob": "*",
+                "input": "node_modules/bootstrap-icons",
+                "output": "src/assets/icons"
+              }, 
               "src/favicon.ico",
               "src/assets"
             ],

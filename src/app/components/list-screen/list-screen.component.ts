@@ -41,6 +41,30 @@ export class ListScreenComponent implements OnInit
     })
   }
 
+  private findByNameOrSurnameOrLogin()
+  {
+    this.userService.findByNameOrSurnameOrLogin(this.searchField, this.currentPage, this.size, this.sortDirection, this.sortField)
+    .subscribe({
+      next: response =>
+      {
+        const headers = response.headers
+        this.users = response.body
+
+        if(this.users)
+        {
+          let totalElements = Number(headers.get('X-Total-Count'))
+          // integer division, + 1 to create page for remainder
+          this.totalPages = Math.floor(totalElements / this.size) + 1
+          this.updateVisiblePages();
+        }
+      },
+      error: error =>
+      {
+        console.log("Error:", error)
+      }
+    })
+  }
+
   private updateVisiblePages()
   {
     const halfVisiblePages = Math.floor(this.totalVisiblePages / 2);
@@ -64,7 +88,26 @@ export class ListScreenComponent implements OnInit
     this.sortField = sortField
     this.sortDirection = sortDirection
 
-    this.findAllUsers()
+    if(this.searchField)
+    {
+      this.findByNameOrSurnameOrLogin()
+    }
+    else
+    {
+      this.findAllUsers()
+    }
+  }
+
+  public onSearchFieldChange()
+  {
+    if(this.searchField)
+    {
+      this.findByNameOrSurnameOrLogin()
+    }
+    else
+    {
+      this.findAllUsers()
+    }
   }
 
   public firstPage()
@@ -98,12 +141,17 @@ export class ListScreenComponent implements OnInit
   }
 
   users: User[] | null = []
-  totalPages: number = 0
+
   visiblePages: number[] = []
   totalVisiblePages: number = 5
+
   sortOption: string = ''
   sortField: string = 'id'
   sortDirection: string = 'asc'
+
+  searchField: string = ''
+
+  private totalPages: number = 0
   private currentPage: number = 0
   private size: number = 13
 }

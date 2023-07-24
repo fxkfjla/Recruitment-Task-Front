@@ -4,7 +4,7 @@
 
   <div class="my-table-wrapper">
     <div class="my-find-select-wrapper">
-      <input class="form-control my-form-control" placeholder="Search...">
+      <input class="form-control my-form-control" [(ngModel)]="searchField" (input)="onSearchFieldChange()" placeholder="Search...">
 
       <select class="form-select my-form-select" [(ngModel)]="sortOption" (change)="onSortOptionChange()">
         <option selected value="id:ASC">Sort by</option>

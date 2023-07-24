@@ -27,5 +27,12 @@ export class UserService
     return this.http.get<User[]>(this.url, {params, observe: 'response'})    
   }
 
+  public findByNameOrSurnameOrLogin(searchField: string, page: number, size: number, direction: string, field: string)
+  {
+    let params = {searchField, page, size, direction, field}
+
+    return this.http.get<User[]>(this.url + '/search', {params, observe: 'response'})    
+  }
+
   private url = environment.apiUrl + '/' + ApiPaths.Users; 
 }

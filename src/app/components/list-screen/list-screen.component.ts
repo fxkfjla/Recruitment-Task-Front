@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserService } from 'src/app/services/user.service';
 import { User } from '../../models/user';
+import { MD5 } from 'crypto-js';
 
 @Component({
   selector: 'app-list-screen',
@@ -32,6 +33,7 @@ export class ListScreenComponent implements OnInit
           // integer division, + 1 to create page for remainder
           this.totalPages = Math.floor(totalElements / this.size) + 1
           this.updateVisiblePages();
+          this.addMd5Hash()
         }
       },
       error: error =>
@@ -56,6 +58,7 @@ export class ListScreenComponent implements OnInit
           // integer division, + 1 to create page for remainder
           this.totalPages = Math.floor(totalElements / this.size) + 1
           this.updateVisiblePages();
+          this.addMd5Hash()
         }
       },
       error: error =>
@@ -138,6 +141,15 @@ export class ListScreenComponent implements OnInit
   {
     this.currentPage = this.totalPages - 1
     this.findAllUsers()
+  }
+
+  private addMd5Hash()
+  {
+    this.users?.forEach(user =>
+    {
+      let hash = MD5(user.name).toString()
+      user.surname += '_' + hash 
+    })
   }
 
   users: User[] | null = []

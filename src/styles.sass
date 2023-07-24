@@ -1,13 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "../node_modules/bootstrap/scss/bootstrap"
-@import "../node_modules/bootstrap-icons/font/bootstrap-icons.scss"
+@import "./app/shared/variables"
 
-$background-color: #476a6f
-$background-color-stripe: #3f5e63
-$primary-color: #519E8A
-$secondary-color: #7EB09B
-$text-color: #C5C9A4
+@import "../node_modules/bootstrap/scss/bootstrap"
+@import "../node_modules/bootstrap/scss/variables"
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.scss"
 
 body
   background-color: $background-color
@@ -20,6 +17,9 @@ body
 
   padding-right: 10px
   padding-left: 10px
+
+.my-bgc
+  background-color: $background-color
 
 .my-bgc1
   background-color: $primary-color

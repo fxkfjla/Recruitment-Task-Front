@@ -34,7 +34,27 @@
 .my-page-link
   text-decoration: none
   padding: 5px 5px
-  color: #333
-  border-radius: 3px
   color: $text-color
   cursor: pointer
+
+.my-find-select-wrapper
+  display: flex
+  justify-content: center
+  align-items: center
+  max-width: 100%
+
+.my-form-control
+  @extend .w-auto, .p-0, .my-bgc, .my-tc
+  width: 20%
+  height: 50%
+  margin-right: 8% 
+  border-width: 0
+  &:focus
+    border-color: $background-color
+    border-width: 0
+    background-color: $background-color
+
+.my-form-select
+  @extend .w-auto, .p-0, .my-bgc, .my-tc
+  background-position: right
+  background-size: 1rem

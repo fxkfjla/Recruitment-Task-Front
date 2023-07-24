@@ -32,6 +32,7 @@ export class ListScreenComponent implements OnInit
           let totalElements = Number(headers.get('X-Total-Count'))
           // integer division, + 1 to create page for remainder
           this.totalPages = Math.floor(totalElements / this.size) + 1
+          this.updateVisiblePages();
         }
       },
       error: error =>
@@ -39,6 +40,29 @@ export class ListScreenComponent implements OnInit
         console.log("Error:", error)
       }
     })
+  }
+
+  private updateVisiblePages()
+  {
+    const halfVisiblePages = Math.floor(this.totalVisiblePages / 2);
+    let startPage = Math.max(this.currentPage - halfVisiblePages, 0);
+    let endPage = startPage + this.totalVisiblePages - 1
+
+    if (endPage >= this.totalPages) {
+      endPage = this.totalPages - 1;
+      startPage = Math.max(endPage - this.totalVisiblePages + 1, 0);
+    }
+
+    this.visiblePages = Array.from(
+      { length: endPage - startPage + 1 },
+      (_, i) => startPage + i
+    );
+  }
+
+  public firstPage()
+  {
+    this.currentPage = 0
+    this.findAllUsers()
   }
 
   public nextPage()
@@ -59,8 +83,18 @@ export class ListScreenComponent implements OnInit
     this.findAllUsers()
   }
 
+  public lastPage()
+  {
+    this.currentPage = this.totalPages - 1
+    this.findAllUsers()
+  }
+
+  //TODO: implement input field for page navigation
+
   users: User[] | null = []
   totalPages: number = 0
+  visiblePages: number[] = []
+  totalVisiblePages: number = 5
   private currentPage: number = 0
   private size: number = 13
 }

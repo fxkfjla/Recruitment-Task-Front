@@ -3,6 +3,20 @@
 <div class="wrapper">
 
   <div class="my-table-wrapper">
+    <div class="my-find-select-wrapper">
+      <input class="form-control my-form-control" placeholder="Search...">
+
+      <select class="form-select my-form-select">
+        <option selected>Sort by</option>
+        <option value="1">Name: asc</option>
+        <option value="1">Name: desc</option>
+        <option value="2">Surname: asc</option>
+        <option value="2">Surname: desc</option>
+        <option value="3">Login: asc</option>
+        <option value="3">Login: desc</option>
+      </select>
+    </div>
+    
     <table class="my-table">
       <thead>
         <tr>
@@ -24,8 +38,10 @@
    
     <ul class="my-pagination">
       <li class="my-page-item"><a class="my-page-link" (click)="previousPage()">Previous</a></li>
-      <li class="my-page-item" *ngFor="let unused of [].constructor(totalPages); let i = index">
-        <a class="my-page-link" (click)="gotoPage(i)">{{i}}</a></li>
+      <li class="my-page-item"><a class="my-page-link" (click)="firstPage()">First</a></li>
+      <li class="my-page-item" *ngFor="let page of visiblePages">
+        <a class="my-page-link" (click)="gotoPage(page)">{{page}}</a></li>
+      <li class="my-page-item"><a class="my-page-link" (click)="lastPage()">Last</a></li>
       <li class="my-page-item"><a class="my-page-link" (click)="nextPage()">Next</a></li>
     </ul>
   </div>

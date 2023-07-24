@@ -1,17 +1,30 @@
 @import '../../../styles'
 
 .my-btn-wrapper
-  @extend .d-flex, .justify-content-center
-  position: absolute
-  top: 50% 
-  right: 50%
-  transform: translate(50%,-50%)
+  display: flex
+  margin: auto
+  justify-content: center
+  align-items: center
+  margin-top: 10%
 
 .my-rounded-btn
   @extend .btn, .fw-bolder, .my-bgc1, .my-tc
-  padding: 5rem 5rem 5rem 5rem
   border-radius: 100%
-  font-size: 10rem
-  line-height: 160px
   &:hover
     background-color: $primary-color
+
+.my-big-rounded-btn
+  @extend .my-rounded-btn
+  padding: 5rem 5rem 5rem 5rem
+  font-size: 10rem
+  line-height: 160px
+  
+.my-small-rounded-btn
+  @extend .my-rounded-btn
+  padding: 0.01rem 0.25rem 0.01rem 0.25rem
+
+.my-ms
+  margin-left: 10rem
+
+.my-me
+  margin-right: 10rem

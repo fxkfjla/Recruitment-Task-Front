@@ -6,14 +6,14 @@
     <div class="my-find-select-wrapper">
       <input class="form-control my-form-control" placeholder="Search...">
 
-      <select class="form-select my-form-select">
-        <option selected>Sort by</option>
-        <option value="1">Name: asc</option>
-        <option value="1">Name: desc</option>
-        <option value="2">Surname: asc</option>
-        <option value="2">Surname: desc</option>
-        <option value="3">Login: asc</option>
-        <option value="3">Login: desc</option>
+      <select class="form-select my-form-select" [(ngModel)]="sortOption" (change)="onSortOptionChange()">
+        <option selected value="id:ASC">Sort by</option>
+        <option value="name:ASC">Name: asc</option>
+        <option value="name:DESC">Name: desc</option>
+        <option value="surname:ASC">Surname: asc</option>
+        <option value="surname:DESC">Surname: desc</option>
+        <option value="login:ASC">Login: asc</option>
+        <option value="login:DESC">Login: desc</option>
       </select>
     </div>
     

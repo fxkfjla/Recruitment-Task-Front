@@ -20,9 +20,9 @@ export class UserService
     return this.http.post(this.url + '/load-xml', formParams, {responseType: 'text'})
   }
 
-  public getUsersPage(page: number, size: number)
+  public getUsersPage(page: number, size: number, direction: string, field: string)
   {
-    let params = {page, size}
+    let params = {page, size, direction, field}
 
     return this.http.get<User[]>(this.url, {params, observe: 'response'})    
   }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { UserService } from 'src/app/services/user.service';
 import { User } from '../../models/user';
@@ -18,9 +17,9 @@ export class ListScreenComponent implements OnInit
     this.findAllUsers() 
   }
 
-  public findAllUsers()
+  private findAllUsers()
   {
-    this.userService.getUsersPage(this.currentPage, this.size).subscribe
+    this.userService.getUsersPage(this.currentPage, this.size, this.sortDirection, this.sortField).subscribe
     ({
       next: response =>
       {
@@ -59,6 +58,15 @@ export class ListScreenComponent implements OnInit
     );
   }
 
+  public onSortOptionChange()
+  {
+    const [sortField, sortDirection] = this.sortOption.split(':')
+    this.sortField = sortField
+    this.sortDirection = sortDirection
+
+    this.findAllUsers()
+  }
+
   public firstPage()
   {
     this.currentPage = 0
@@ -89,12 +97,13 @@ export class ListScreenComponent implements OnInit
     this.findAllUsers()
   }
 
-  //TODO: implement input field for page navigation
-
   users: User[] | null = []
   totalPages: number = 0
   visiblePages: number[] = []
   totalVisiblePages: number = 5
+  sortOption: string = ''
+  sortField: string = 'id'
+  sortDirection: string = 'asc'
   private currentPage: number = 0
   private size: number = 13
 }

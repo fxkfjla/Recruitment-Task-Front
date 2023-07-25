@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -21,7 +22,6 @@ export class FormScreenComponent
 
     if(file)
     {
-      // update user interface on success and error
       this.userService.uploadXMLFile(file).subscribe
       ({
         next: (response) =>
@@ -30,13 +30,18 @@ export class FormScreenComponent
         },
         error: (error) =>
         {
+          alert("Failed to import data!")
           console.log("Error:", error)
         },
         complete: () =>
         {
+          alert("Data imported successfully!")
           fileInput.value = ''
+          this.dataIsLoaded = true
         }
       })
     }
   }
+
+  dataIsLoaded = false
 }

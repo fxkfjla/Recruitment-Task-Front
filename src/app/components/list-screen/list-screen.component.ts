@@ -57,7 +57,7 @@ export class ListScreenComponent implements OnInit
           let totalElements = Number(headers.get('X-Total-Count'))
           // integer division, + 1 to create page for remainder
           this.totalPages = Math.floor(totalElements / this.size) + 1
-          this.updateVisiblePages();
+          this.updateVisiblePages()
           this.addMd5Hash()
         }
       },
@@ -70,13 +70,14 @@ export class ListScreenComponent implements OnInit
 
   private updateVisiblePages()
   {
-    const halfVisiblePages = Math.floor(this.totalVisiblePages / 2);
-    let startPage = Math.max(this.currentPage - halfVisiblePages, 0);
+    const halfVisiblePages = Math.floor(this.totalVisiblePages / 2)
+    let startPage = Math.max(this.currentPage - halfVisiblePages, 0)
     let endPage = startPage + this.totalVisiblePages - 1
 
-    if (endPage >= this.totalPages) {
-      endPage = this.totalPages - 1;
-      startPage = Math.max(endPage - this.totalVisiblePages + 1, 0);
+    if (endPage >= this.totalPages)
+    {
+      endPage = this.totalPages - 1
+      startPage = Math.max(endPage - this.totalVisiblePages + 1, 0)
     }
 
     this.visiblePages = Array.from(

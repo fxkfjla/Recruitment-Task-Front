@@ -7,19 +7,10 @@
   justify-content: center
   height: 90vh
 
-.my-form-wrapper
-  display: flex
-  align-items: center
+input[type=file]
+  background-color: $background-color
+  color: $text_color
   margin-bottom: 20px
 
-.my-form-control
-  @extend .form-control
-  width: 70%
-
-button[type="submit"]
-  @extend .rounded-2
-  flex: 1
-  margin: 0
-
-.my-btn1
-  @extend .fs-6
+input[type=file]::file-selector-button
+  @extend .my-btn1, .fs-6

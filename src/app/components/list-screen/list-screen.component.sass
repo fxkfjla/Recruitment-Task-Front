@@ -40,20 +40,23 @@
 .my-find-select-wrapper
   display: flex
   justify-content: center
+  gap: 175px
   align-items: center
-  max-width: 100%
 
-.my-form-control
-  @extend .w-auto, .p-0, .my-bgc, .my-tc
-  width: 20%
+input
+  width: auto
+  color: $text-color
   height: 50%
   margin-right: 8% 
-  border-width: 0
-  &:focus
-    border-color: $background-color
-    border-width: 0
-    background-color: $background-color
+  background-color: $background-color
+  background-position: left
 
+textarea:focus, input:focus
+    outline: none
+
+input::placeholder
+  color: $text-color
+  
 .my-form-select
   @extend .w-auto, .p-0, .my-bgc, .my-tc
   background-position: right

@@ -3,12 +3,8 @@
 <div class="wrapper">
 
   <div class="my-content-wrapper">
-    <form (submit)="uploadXMLFile($event)" class="my-form-wrapper">
-      <input class="my-form-control" type="file" name="file" #fileInputRef>
-      <button class="my-btn1" type="submit">Upload File</button>
-    </form>
+    <input class="" type="file" (change)="uploadXMLFile($event)" placeholder="UploadFile" accept=".xml">
 
-    <!-- <button *ngIf="dataIsLoaded" class="my-btn1">View imported data</button> -->
-    <a *ngIf="dataIsLoaded" href="/list" class="my-btn1" role="button">View imported data</a>
+    <a *ngIf="dataIsLoaded" href="/list" class="my-btn1 fs-6" role="button">View imported data</a>
   </div>
 </div>

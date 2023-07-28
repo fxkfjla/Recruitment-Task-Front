@@ -18,9 +18,21 @@ export class ListScreenComponent implements OnInit
     this.findAllUsers() 
   }
 
+  private findUsers()
+  {
+    if(this.searchField)
+    {
+      this.findByNameOrSurnameOrLogin()
+    }
+    else
+    {
+      this.findAllUsers()
+    }
+  }
+
   private findAllUsers()
   {
-    this.userService.getUsersPage(this.currentPage, this.size, this.sortDirection, this.sortField).subscribe
+    this.userService.findAll(this.currentPage, this.size, this.sortDirection, this.sortField).subscribe
     ({
       next: response =>
       {
@@ -59,6 +71,12 @@ export class ListScreenComponent implements OnInit
           this.totalPages = Math.floor(totalElements / this.size) + 1
           this.updateVisiblePages()
           this.addMd5Hash()
+
+          if(this.currentPage >= this.totalPages)
+          {
+            this.currentPage = 0
+            this.findUsers()
+          }
         }
       },
       error: error =>
@@ -80,7 +98,8 @@ export class ListScreenComponent implements OnInit
       startPage = Math.max(endPage - this.totalVisiblePages + 1, 0)
     }
 
-    this.visiblePages = Array.from(
+    this.visiblePages = Array.from
+    (
       { length: endPage - startPage + 1 },
       (_, i) => startPage + i
     );
@@ -92,63 +111,55 @@ export class ListScreenComponent implements OnInit
     this.sortField = sortField
     this.sortDirection = sortDirection
 
-    if(this.searchField)
-    {
-      this.findByNameOrSurnameOrLogin()
-    }
-    else
-    {
-      this.findAllUsers()
-    }
+    this.findUsers()
   }
 
   public onSearchFieldChange()
   {
-    if(this.searchField)
-    {
-      this.findByNameOrSurnameOrLogin()
-    }
-    else
-    {
-      this.findAllUsers()
-    }
+    this.findUsers()
   }
 
   public firstPage()
   {
     this.currentPage = 0
-    this.findAllUsers()
+    this.findUsers()
   }
 
   public nextPage()
   {
-    this.currentPage++
-    this.findAllUsers()
+    if(this.currentPage < this.totalPages - 1)
+    {
+      this.currentPage++
+      this.findUsers()
+    }
   }
 
   public gotoPage(index: number)
   {
     this.currentPage = index
-    this.findAllUsers()
+    this.findUsers()
   }
 
   public previousPage()
   {
-    this.currentPage--
-    this.findAllUsers()
+    if(this.currentPage > 0)
+    {
+      this.currentPage--
+      this.findUsers()
+    }
   }
 
   public lastPage()
   {
     this.currentPage = this.totalPages - 1
-    this.findAllUsers()
+    this.findUsers()
   }
 
   private addMd5Hash()
   {
     this.users?.forEach(user =>
     {
-      let hash = MD5(user.name).toString()
+      const hash = MD5(user.name).toString()
       user.surname += '_' + hash 
     })
   }

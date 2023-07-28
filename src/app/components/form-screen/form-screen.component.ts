@@ -13,34 +13,32 @@ export class FormScreenComponent
 
   constructor(private userService: UserService) {}
 
-  public uploadXMLFile(event: Event): void
+  uploadXMLFile(event: any)
   {
-    event.preventDefault()
+    const fileList = event.target.files
 
-    const fileInput = this.fileInputRef.nativeElement as HTMLInputElement
-    const file = fileInput?.files?.[0]
+    if(fileList.length < 1) return
 
-    if(file)
-    {
-      this.userService.uploadXMLFile(file).subscribe
-      ({
-        next: (response) =>
-        {
-          console.log("Response:", response)
-        },
-        error: (error) =>
-        {
-          alert("Failed to import data!")
-          console.log("Error:", error)
-        },
-        complete: () =>
-        {
-          alert("Data imported successfully!")
-          fileInput.value = ''
-          this.dataIsLoaded = true
-        }
-      })
-    }
+    const file = fileList[0]
+
+    this.userService.uploadXMLFile(file).subscribe
+    ({
+      next: (response) =>
+      {
+        console.log("Response:", response)
+      },
+      error: (error) =>
+      {
+        alert("Failed to import data!")
+        console.log("Error:", error)
+      },
+      complete: () =>
+      {
+        alert("Data imported successfully!")
+        this.dataIsLoaded = true
+        event.target.value = null
+      }
+    })
   }
 
   dataIsLoaded = false

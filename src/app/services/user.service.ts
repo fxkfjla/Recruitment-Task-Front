@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpParams} from '@angular/common/http';
 
 import { ApiPaths } from '../enums/api-paths.enum';
 import { environment } from 'src/environments/environment';
@@ -14,22 +14,22 @@ export class UserService
 
   public uploadXMLFile(file: File)
   {
-    let formParams = new FormData();
-    formParams.append('file', file)
+    const formData = new FormData()
+    formData.append('file', file)
 
-    return this.http.post(this.url + '/load-xml', formParams, {responseType: 'text'})
+    return this.http.post(this.url + '/load-xml', formData, {responseType: 'text'})
   }
 
-  public getUsersPage(page: number, size: number, direction: string, field: string)
+  public findAll(page: number, size: number, direction: string, field: string)
   {
-    let params = {page, size, direction, field}
+    const params = {page, size, direction, field}
 
     return this.http.get<User[]>(this.url, {params, observe: 'response'})    
   }
 
-  public findByNameOrSurnameOrLogin(searchField: string, page: number, size: number, direction: string, field: string)
+  public findByNameOrSurnameOrLogin(search: string, page: number, size: number, direction: string, field: string)
   {
-    let params = {searchField, page, size, direction, field}
+    const params = {search, page, size, direction, field}
 
     return this.http.get<User[]>(this.url + '/search', {params, observe: 'response'})    
   }

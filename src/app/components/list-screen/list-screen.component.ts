@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from '../../models/user';
 import { MD5 } from 'crypto-js';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-list-screen',
@@ -18,7 +19,7 @@ export class ListScreenComponent implements OnInit
     this.findAllUsers() 
   }
 
-  private findUsers()
+  findUsers()
   {
     if(this.searchField)
     {
@@ -30,7 +31,7 @@ export class ListScreenComponent implements OnInit
     }
   }
 
-  private findAllUsers()
+  findAllUsers()
   {
     this.userService.findAll(this.currentPage, this.size, this.sortDirection, this.sortField).subscribe
     ({
@@ -41,9 +42,7 @@ export class ListScreenComponent implements OnInit
 
         if(this.users)
         {
-          let totalElements = Number(headers.get('X-Total-Count'))
-          // integer division, + 1 to create page for remainder
-          this.totalPages = Math.floor(totalElements / this.size) + 1
+          this.countTotalPages(headers)
           this.updateVisiblePages();
           this.addMd5Hash()
         }
@@ -55,7 +54,7 @@ export class ListScreenComponent implements OnInit
     })
   }
 
-  private findByNameOrSurnameOrLogin()
+  findByNameOrSurnameOrLogin()
   {
     this.userService.findByNameOrSurnameOrLogin(this.searchField, this.currentPage, this.size, this.sortDirection, this.sortField)
     .subscribe({
@@ -66,9 +65,7 @@ export class ListScreenComponent implements OnInit
 
         if(this.users)
         {
-          let totalElements = Number(headers.get('X-Total-Count'))
-          // integer division, + 1 to create page for remainder
-          this.totalPages = Math.floor(totalElements / this.size) + 1
+          this.countTotalPages(headers)
           this.updateVisiblePages()
           this.addMd5Hash()
 
@@ -86,7 +83,14 @@ export class ListScreenComponent implements OnInit
     })
   }
 
-  private updateVisiblePages()
+  countTotalPages(headers: HttpHeaders)
+  {
+    let totalElements = Number(headers.get('X-Total-Count'))
+    // integer division, + 1 to create page for remainder
+    this.totalPages = Math.floor(totalElements / this.size) + 1
+  }
+
+  updateVisiblePages()
   {
     const halfVisiblePages = Math.floor(this.totalVisiblePages / 2)
     let startPage = Math.max(this.currentPage - halfVisiblePages, 0)
@@ -105,7 +109,7 @@ export class ListScreenComponent implements OnInit
     );
   }
 
-  public onSortOptionChange()
+  onSortOptionChange()
   {
     const [sortField, sortDirection] = this.sortOption.split(':')
     this.sortField = sortField
@@ -114,18 +118,18 @@ export class ListScreenComponent implements OnInit
     this.findUsers()
   }
 
-  public onSearchFieldChange()
+  onSearchFieldChange()
   {
     this.findUsers()
   }
 
-  public firstPage()
+  firstPage()
   {
     this.currentPage = 0
     this.findUsers()
   }
 
-  public nextPage()
+  nextPage()
   {
     if(this.currentPage < this.totalPages - 1)
     {
@@ -134,13 +138,13 @@ export class ListScreenComponent implements OnInit
     }
   }
 
-  public gotoPage(index: number)
+  gotoPage(index: number)
   {
     this.currentPage = index
     this.findUsers()
   }
 
-  public previousPage()
+  previousPage()
   {
     if(this.currentPage > 0)
     {
@@ -149,19 +153,44 @@ export class ListScreenComponent implements OnInit
     }
   }
 
-  public lastPage()
+  lastPage()
   {
     this.currentPage = this.totalPages - 1
     this.findUsers()
   }
 
-  private addMd5Hash()
+  addMd5Hash()
   {
     this.users?.forEach(user =>
     {
       const hash = MD5(user.name).toString()
       user.surname += '_' + hash 
     })
+  }
+
+  getCurrentPage()
+  {
+    return this.currentPage;
+  }
+
+  getTotalPages()
+  {
+    return this.totalPages;
+  }
+
+  setCurrentPage(currentPage: number)
+  {
+    this.currentPage = currentPage;
+  }
+
+  setTotalPages(totalPages: number)
+  {
+    this.totalPages = totalPages;
+  }
+
+  getVisiblePages()
+  {
+    return this.visiblePages;
   }
 
   users: User[] | null = []

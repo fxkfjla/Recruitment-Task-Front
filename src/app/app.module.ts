@@ -9,6 +9,7 @@ import { StartScreenComponent } from './components/start-screen/start-screen.com
 import { FormScreenComponent } from './components/form-screen/form-screen.component';
 import { ListScreenComponent } from './components/list-screen/list-screen.component';
 import { HeaderComponent } from './components/header/header.component';
+import { ToastNoAnimationModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HeaderComponent } from './components/header/header.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ToastNoAnimationModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

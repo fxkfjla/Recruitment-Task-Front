@@ -1,0 +1,10 @@
+<app-header></app-header>
+
+<div class="wrapper">
+
+  <div class="my-content-wrapper">
+    <input class="" type="file" (change)="uploadXMLFile($event)" placeholder="UploadFile" accept=".xml">
+
+    <a *ngIf="dataIsLoaded" href="/list" class="my-btn1 fs-6" role="button">View imported data</a>
+  </div>
+</div>

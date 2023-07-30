@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+<div class="wrapper">
+
+  <div class="my-table-wrapper">
+    <div class="my-find-select-wrapper">
+      <input class="search my-form-control" [(ngModel)]="searchField" (input)="onSearchFieldChange()" placeholder="Search...">
+
+      <select class="form-select my-form-select" [(ngModel)]="sortOption" (change)="onSortOptionChange()">
+        <option selected value="id:ASC">Id: asc</option>
+        <option selected value="id:DESC">Id: desc</option>
+        <option value="name:ASC">Name: asc</option>
+        <option value="name:DESC">Name: desc</option>
+        <option value="surname:ASC">Surname: asc</option>
+        <option value="surname:DESC">Surname: desc</option>
+        <option value="login:ASC">Login: asc</option>
+        <option value="login:DESC">Login: desc</option>
+      </select>
+    </div>
+    
+    <table class="my-table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Surname</th>
+          <th scope="col">Login</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.id}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.surname}}</td>
+          <td>{{user.login}}</td>
+        </tr>
+      </tbody>
+    </table>
+   
+    <ul class="my-pagination">
+      <li class="my-page-item"><a class="my-page-link" (click)="previousPage()">Previous</a></li>
+      <li class="my-page-item"><a class="my-page-link" (click)="firstPage()">First</a></li>
+      <li class="my-page-item" *ngFor="let page of visiblePages">
+        <a class="my-page-link" (click)="gotoPage(page)">{{page}}</a></li>
+      <li class="my-page-item"><a class="my-page-link" (click)="lastPage()">Last</a></li>
+      <li class="my-page-item"><a class="my-page-link" (click)="nextPage()">Next</a></li>
+    </ul>
+  </div>
+
+</div>

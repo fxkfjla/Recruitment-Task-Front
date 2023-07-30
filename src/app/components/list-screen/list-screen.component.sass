@@ -1,0 +1,63 @@
+@import '../../../styles'
+
+.my-table-wrapper
+  display: flex
+  text-align: center
+  justify-content: center
+  flex-direction: column
+
+.my-table
+  margin: auto
+  width: 35%
+  border-collapse: collapse
+  border-spacing: 0
+  color: $text-color
+
+.my-table th,
+.my-table td
+  padding: 8px
+  text-align: left
+  border-bottom: 1px solid $secondary-color
+
+.my-table tbody tr:nth-child(even)
+  background-color: $background-color-stripe
+
+.my-pagination
+  display: flex
+  padding: 0
+  margin: 5px
+  justify-content: center
+
+.my-page-item
+  list-style: none
+
+.my-page-link
+  text-decoration: none
+  padding: 5px 5px
+  color: $text-color
+  cursor: pointer
+
+.my-find-select-wrapper
+  display: flex
+  justify-content: center
+  gap: 175px
+  align-items: center
+
+input
+  width: auto
+  color: $text-color
+  height: 50%
+  margin-right: 8% 
+  background-color: $background-color
+  background-position: left
+
+textarea:focus, input:focus
+    outline: none
+
+input::placeholder
+  color: $text-color
+  
+.my-form-select
+  @extend .w-auto, .p-0, .my-bgc, .my-tc
+  background-position: right
+  background-size: 1rem
